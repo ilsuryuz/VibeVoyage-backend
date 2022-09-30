@@ -9,6 +9,13 @@ const app = express();
 app.use(cors()); // Cors
 
 // ** Routes **
+app.get("/", (req,res)=>{
+    res.send("It's a Vibe")
+})
+
+// ** I N D U C E S **
+
+// ** Index **
 
 // ** Make App listen to port **
 const PORT = process.env.PORT || 4000;
