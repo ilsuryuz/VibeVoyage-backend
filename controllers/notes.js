@@ -15,4 +15,17 @@ notesRouter.get("/", async (req, res) => {
     }
 })
 
+
+// Create
+notesRouter.post('/', async (req,res)=>{
+    try{
+        res.json(await Notes.create(req.body))
+    } catch (error){
+        res.status(400).json(error)
+    }
+})
+// Delete
+notesRouter.delete('/:id')
+// Update
+
 module.exports = notesRouter;
