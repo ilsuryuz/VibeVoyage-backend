@@ -1,15 +1,34 @@
 // ** Import Dependencies **
+require("dotenv").config();
+const { PORT = 4000, MONGODB_URL} = process.env;
 const express = require("express");
-const cors = require("cors");
+const mongoose = require("mongoose");
 
 // ** Initialize app **
 const app = express();
 
+// ** Import Middleware **
+const cors = require("cors");
+const morgan = require("morgan");
+
+// ** Database Connection **
+mongoose.connect(MONGODB_URL, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+})
+// DB Connection Events
+mongoose.connection
+    .on("open", () => console.log("You are connect to mongoose"))
+    .on("close", () => console.log("You are disconnected from mongoose"))
+    .on("error", (error) => console.log(error));
+
+
 // ** Middleware **
 app.use(cors()); // Cors
-
+app.use(morgan("dev")); //logging
+app.use(express.json());  // parse json bodies
 // ** Routes **
-app.get("/", (req,res)=>{
+app.get("/", (req, res)=>{
     res.send("It's a Vibe")
 })
 
@@ -18,5 +37,4 @@ app.get("/", (req,res)=>{
 // ** Index **
 
 // ** Make App listen to port **
-const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Vibing on port ${PORT}`));
