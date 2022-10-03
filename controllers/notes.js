@@ -33,5 +33,13 @@ notesRouter.delete('/:id', async (req,res)=>{
     }
 })
 // Update
+notesRouter.put('/:id', async (req,res)=>{
+    try{
+        res.json(await Notes.findByIdAndUpdate(req.params.id, req.body, {new:true}))
+    } catch (error){
+        res.status(400).json(error)
+    }
+})
+
 
 module.exports = notesRouter;
