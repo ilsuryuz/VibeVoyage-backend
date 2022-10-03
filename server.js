@@ -27,14 +27,21 @@ mongoose.connection
 app.use(cors()); // Cors
 app.use(morgan("dev")); //logging
 app.use(express.json());  // parse json bodies
+
+
 // ** Routes **
+
+// ** I N D U C E S **
+// Index
 app.get("/", (req, res)=>{
     res.send("It's a Vibe")
 })
 
-// ** I N D U C E S **
 
-// ** Index **
+// ** Controllers **
+// Notes
+const notesController = require("./controllers/notes");
+app.use("/notes", notesController);
 
 // ** Make App listen to port **
 app.listen(PORT, () => console.log(`Vibing on port ${PORT}`));
