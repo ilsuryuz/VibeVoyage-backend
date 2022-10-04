@@ -43,5 +43,8 @@ app.get("/", (req, res)=>{
 const notesController = require("./controllers/notes");
 app.use("/notes", notesController);
 
+// Videos
+const videosController = require("./controllers/videos");
+app.use("/videos", videosController);
 // ** Make App listen to port **
 app.listen(PORT, () => console.log(`Vibing on port ${PORT}`));
