@@ -16,10 +16,19 @@ videosRouter.get("/", async (req, res) => {
 })
 
 // Create
-videosRouter.post('/', async (req,res)=>{
+videosRouter.post('/', async (req, res)=>{
     try{
         res.json(await Video.create(req.body))
     } catch (error){
+        res.status(400).json(error)
+    }
+})
+
+// Delete
+videosRouter.delete('/:id', async (req, res)=>{
+    try{
+        res.json(await Video.findByIdAndDelete(req.params.id))
+    } catch(error){
         res.status(400).json(error)
     }
 })
