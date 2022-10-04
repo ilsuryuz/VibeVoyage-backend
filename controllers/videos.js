@@ -15,4 +15,13 @@ videosRouter.get("/", async (req, res) => {
     }
 })
 
+// Create
+videosRouter.post('/', async (req,res)=>{
+    try{
+        res.json(await Video.create(req.body))
+    } catch (error){
+        res.status(400).json(error)
+    }
+})
+
 module.exports = videosRouter;
